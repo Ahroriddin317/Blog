@@ -1,0 +1,29 @@
+h1, h2 {
+  margin-bottom: 35px;
+  font-size: 30px;
+  color: #b0b0b0;
+  font-weight: 500;
+}
+
+.post{
+  margin-top: 20px;
+
+  .post-img{
+    margin-bottom: 100px;
+  }
+
+  .text-post{
+    max-width: 896px;
+    height: 376px;
+    margin: 0 auto;
+
+    .subtitle{
+      color: #bdb7aa;
+      font-size: 14px;
+    }
+
+    .description-post{
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+  }
+}

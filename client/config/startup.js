@@ -1,12 +1,12 @@
 import { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { useDispatch } from 'react-redux'
-import { trySignIn } from '../redux/reducers/auth'
+// import { useDispatch } from 'react-redux'
+// import { trySignIn } from '../redux/reducers/auth'
 
 const Startup = (props) => {
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(trySignIn())
+    // dispatch(trySignIn())
   }, [])
 
   return props.children

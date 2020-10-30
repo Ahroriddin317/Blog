@@ -1,5 +1,5 @@
 import React from 'react'
-import LoginForm from './auth/login'
+import Post from './post'
 import Head from './head'
 
 const Home = () => {
@@ -7,7 +7,7 @@ const Home = () => {
   return (
     <div>
       <Head/>
-      <LoginForm/>
+      <Post/>
     </div>
   )
 }

@@ -11,8 +11,8 @@ import Home from '../components/home'
 import NotFound from '../components/404'
 
 import Startup from './startup'
-import Registration from '../components/auth/registration'
 import PrivateComponent from '../components/privateComponent'
+import LoginForm from '../components/auth/login'
 
 const OnlyAnonymousRoute = ({ component: Component, ...rest }) => {
 
@@ -77,8 +77,8 @@ const RootComponent = (props) => {
       <RouterSelector history={history} location={props.location} context={props.context}>
         <Startup>
           <Switch>
-            <OnlyAnonymousRoute exact path="/login" component={() => <Home />} />
-            <Route exact path="/" component={() => <Registration />} />
+            <OnlyAnonymousRoute exact path="/login" component={() => <LoginForm />} />
+            <Route exact path="/" component={() => <Home />} />
             <PrivateRoute exact path="/private" component={() => <PrivateComponent />} />
             <Route component={() => <NotFound />} />
           </Switch>
