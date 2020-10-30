@@ -5,13 +5,21 @@ import bodyParser from 'body-parser'
 import sockjs from 'sockjs'
 import { renderToStaticNodeStream } from 'react-dom/server'
 import React from 'react'
-
 import cookieParser from 'cookie-parser'
+import passport from 'passport'
+import auth from './middleware/auth'
+import jwt from 'jsonwebtoken'
+
+import mongooseService from './services/mongoose'
+import passportJWT from './services/passport.js'
+
 import config from './config'
 import Html from '../client/html'
+import User from './model/User.model'
 
 const Root = () => ''
 
+mongooseService.connect()
 try {
   // eslint-disable-next-line import/no-unresolved
   // ;(async () => {
@@ -33,13 +41,68 @@ const server = express()
 
 const middleware = [
   cors(),
+  passport.initialize(),
   express.static(path.resolve(__dirname, '../dist/assets')),
   bodyParser.urlencoded({ limit: '50mb', extended: true, parameterLimit: 50000 }),
   bodyParser.json({ limit: '50mb', extended: true }),
   cookieParser()
 ]
 
+passport.use('jwt', passportJWT.jwt)
+
 middleware.forEach((it) => server.use(it))
+
+server.get('/api/v1/auth', async (req, res) => {
+  try {
+    const jwtUser = jwt.verify(req.cookies.token, config.secret)
+    const user = await User.findById(jwtUser.uid)
+    const payload = { uid: user.id }
+    const token = jwt.sign(payload, config.secret, { expiresIn: '48h' })
+    delete user.password
+    res.cookie('token', token, { maxAge: 1000 * 60 * 60 * 48 })
+    res.json({ status: 'ok', token, user })
+  } catch (err) {
+    console.log(err)
+    res.json({ status: 'error', err })
+  }
+})
+
+server.post('/api/v1/auth', async (req, res) => {
+  console.log(req.body)
+  try {
+    const user = await User.findAndValidateUser(req.body)
+    const payload = { uid: user.id }
+    const token = jwt.sign(payload, config.secret, { expiresIn: '48h' })
+    delete user.password
+    res.cookie('token', token, { maxAge: 1000 * 60 * 60 * 48 })
+    res.json({ status: 'ok', user, token })
+  } catch (err) {
+    console.log(err)
+    res.json({ status: 'error', err })
+  }
+})
+
+server.post('/api/v1/registration', async (req, res) => {
+  const { email, password, name } = req.body
+  const user = new User({
+    email,
+    password,
+    name
+  })
+  await user.save()
+   const usr = await User.findAndValidateUser({ email, password })
+   console.log(usr)
+   const payload = { uid: usr.id }
+   const token = jwt.sign(payload, config.secret, { expiresIn: '48h' })
+   delete usr.password
+   res.cookie('token', token, { maxAge: 1000 * 60 * 60 * 48 })
+   res.json({ status: 'ok', usr, token })
+})
+
+server.use('/api/', (req, res) => {
+  res.status(404)
+  res.end()
+})
 
 server.use('/api/', (req, res) => {
   res.status(404)
@@ -48,7 +111,7 @@ server.use('/api/', (req, res) => {
 
 const [htmlStart, htmlEnd] = Html({
   body: 'separator',
-  title: 'Skillcrucial - Become an IT HERO'
+  title: 'Become an IT HERO'
 }).split('separator')
 
 server.get('/', (req, res) => {
