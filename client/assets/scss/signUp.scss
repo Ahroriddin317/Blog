@@ -1,0 +1,28 @@
+.sign-up{
+  width: 100%;
+  height: 287px;
+  background-color: hsl(0, 0%, 94%);
+  margin-top: 122px;
+  padding-top: 72px;
+
+  .sign-up-item{
+    width: 409px;
+    height: 139px;
+    margin: 0 auto;
+
+    input{
+      width: 330px;
+      height: 35px;
+      background-color:  hsl(0, 0%, 94%);
+      outline-style: none;
+    }
+
+    .sign-up-button{
+      position: absolute;
+      border: none;
+      outline-style: none;
+      margin-top: 10px;
+      margin-right: -20px;
+    }
+  }
+}

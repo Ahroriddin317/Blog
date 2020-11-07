@@ -1,12 +1,6 @@
-h1, h2 {
-  margin-bottom: 35px;
-  font-size: 30px;
-  color: #b0b0b0;
-  font-weight: 500;
-}
-
 .post{
   margin-top: 20px;
+  margin-bottom: 126px;
 
   .post-img{
     margin-bottom: 100px;
@@ -25,5 +19,18 @@ h1, h2 {
     .description-post{
       font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     }
+  }
+
+  button{
+    text-transform: uppercase;
+    margin-top: 55px;
+    padding: 5px 5px;
+    color: #d9d6ce;
+    border-radius: 5px;
+  }
+
+  button:hover{
+    background-color: #d9d6ce;
+    color: white;
   }
 }

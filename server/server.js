@@ -16,6 +16,7 @@ import passportJWT from './services/passport.js'
 import config from './config'
 import Html from '../client/html'
 import User from './model/User.model'
+import Post from './model/Post.model'
 
 const Root = () => ''
 
@@ -65,6 +66,11 @@ server.get('/api/v1/auth', async (req, res) => {
     console.log(err)
     res.json({ status: 'error', err })
   }
+})
+
+server.get('/api/v1/posts', async (req, res) => {
+  const posts = await Post.find({})
+  res.json(posts)
 })
 
 server.post('/api/v1/auth', async (req, res) => {

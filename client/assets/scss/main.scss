@@ -7,8 +7,21 @@
 
 .container{
   max-width: 1066px;
-  height: 980px;
   margin: 0 auto;
 }
 
-@import './post.scss'
+h1, h2 {
+  margin-bottom: 35px;
+  font-size: 30px;
+  color: #b0b0b0;
+  font-weight: 500;
+}
+
+.cards-blog{
+  width: 904px;
+  display: flex;
+  justify-content: space-between;
+   margin: 0 auto;
+}
+
+@import './post.scss', './cardBlog.scss','./signUp.scss'

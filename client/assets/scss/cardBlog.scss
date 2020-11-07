@@ -1,0 +1,22 @@
+.card-blog{
+  width: 421px;
+  height: 481px;
+
+  h1{
+    color: #626262;
+  }
+
+  .card-blog-text{
+    margin-top: 32px;
+
+    .subtitle{
+      color: #bdb7aa;
+      font-size: 14px;
+    }
+
+    .description-post{
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      font-size: 14px;
+    }
+  }
+}
