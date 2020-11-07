@@ -1,5 +1,5 @@
 import React from 'react'
-import postImage from '../assets/images/post.jpg'
+import postImage from '../../assets/images/post.jpg'
 
 const Post = ({title, subTitle, description}) => {
   return (

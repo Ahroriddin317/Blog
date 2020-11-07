@@ -5,6 +5,12 @@
 
 @tailwind utilities;
 
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .container{
   max-width: 1066px;
   margin: 0 auto;
@@ -24,4 +30,4 @@ h1, h2 {
    margin: 0 auto;
 }
 
-@import './post.scss', './cardBlog.scss','./signUp.scss'
+@import './post.scss', './cardBlog.scss','./signUp.scss','./nav-bar.scss'
