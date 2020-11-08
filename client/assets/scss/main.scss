@@ -30,4 +30,8 @@ h1, h2 {
    margin: 0 auto;
 }
 
-@import './post.scss', './cardBlog.scss','./signUp.scss','./nav-bar.scss'
+@import 'post';
+@import 'signUp';
+@import 'nav-bar';
+@import 'cardBlog';
+@import 'admin-page';
