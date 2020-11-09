@@ -72,6 +72,11 @@ server.get('/api/v1/posts', async (req, res) => {
   const posts = await Post.find({})
   res.json(posts)
 })
+server.post('/api/v1/added-post', async (req, res) => {
+  const post = new Post(req.body)
+  await post.save()
+  res.json({ status: 'added new post' })
+})
 
 server.post('/api/v1/auth', async (req, res) => {
   console.log(req.body)

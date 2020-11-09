@@ -2,18 +2,22 @@ import mongoose from 'mongoose'
 
 const postSchema = new mongoose.Schema(
   {
-    img : {
+    img: {
+      type: String
+    },
+    cotegory: {
       type: String,
-          required: true,
+      default: 'photodiary'
+    },
+    title: {
+      type: String,
+      required: true,
       unique: true
     },
-    subTitle : {
-      type: String
-    },
-    title : {
-      type: String
-    },
     description: {
+      type: String
+    },
+    miniDescription: {
       type: String
     }
   },

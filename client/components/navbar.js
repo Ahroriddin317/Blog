@@ -1,7 +1,10 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 const NavBar = () => {
+  const { token } = useSelector(s => s.auth)
+
   const linkArray = [
     {
       url: '/',
@@ -10,10 +13,6 @@ const NavBar = () => {
     {
       url: '/',
       link: 'blog'
-    },
-    {
-      url: '/login',
-      link: 'sign in'
     }
   ]
 
@@ -26,15 +25,16 @@ const NavBar = () => {
           </div>
           <div>
             <ul className="nav-menu">
-              {linkArray.map(({ link, url}) => {
+              {linkArray.map(({ link, url }) => {
                 return (
                   <li key={link}>
-                    <Link to={url}>
-                      {link}
-                    </Link>
+                    <Link to={url}>{link}</Link>
                   </li>
                 )
               })}
+              <li>
+                <Link to="/login">{token !== undefined ? 'admin' : 'sing in'}</Link>
+              </li>
             </ul>
           </div>
         </div>

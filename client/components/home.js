@@ -13,22 +13,22 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getPosts())
-  }, [])
+  }, [posts])
 
   return (
     <div>
       <Head />
       <NavBar />
       <div className="container">
-        {posts.map(({ id, title, subTitle, description }) => {
-          return <Post key={id} title={title} subTitle={subTitle} description={description} />
+        {posts.map(({ title, cotegory, description }) => {
+          return <Post key={title} title={title} cotegory={cotegory} description={description} />
         })}
         <div className="cards-blog">
-          {posts.map(({ id, subTitle, title, miniDescription }) => {
+          {posts.map(({ cotegory, title, miniDescription }) => {
             return (
               <CardPost
-                key={id}
-                subTitle={subTitle}
+                key={title}
+                cotegory={cotegory}
                 title={title}
                 miniDescription={miniDescription}
               />

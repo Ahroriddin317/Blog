@@ -5,7 +5,6 @@ import { signIn, updateLoginField, updatePasswordField } from '../../redux/reduc
 const LoginForm = () => {
   const dispatch = useDispatch()
   const { email, password} = useSelector((s) => s.auth)
-  console.log(email, password)
   return (
     <div className="w-screen h-screen bg-gray-100 flex justify-center items-center">
       <div className=" max-w-xs ">
