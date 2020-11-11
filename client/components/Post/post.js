@@ -1,17 +1,16 @@
 import React from 'react'
-import postImage from '../../assets/images/post.jpg'
 
-const Post = ({ title, cotegory, description }) => {
+const Post = ({ title, cotegory, description, img }) => {
+
   return (
     <div className="post">
       <div className="post-img">
-        <img src={postImage} alt="post" />
+        <img src={img} alt="post" />
       </div>
       <div className="text-post">
         <h2 className="subtitle">{cotegory}</h2>
         <h1>{title}</h1>
         <p className="description-post">{description}</p>
-        <button type="button">leave a comment</button>
       </div>
     </div>
   )

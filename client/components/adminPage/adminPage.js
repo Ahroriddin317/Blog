@@ -10,30 +10,6 @@ const AdminPage = () => {
   const [error, setError] = useState('')
 
   const handlerButton = () => {
-    if (title.trim() === '') {
-      setError('please check if you have filled in all the fields')
-      setTimeout(() => {
-        setError('')
-      }, 4000)
-    }
-    if (imgUrl.trim() === '') {
-      setError('please check if you have filled in all the fields')
-      setTimeout(() => {
-        setError('')
-      }, 4000)
-    }
-    if (description.trim() === '') {
-      setError('please check if you have filled in all the fields')
-      setTimeout(() => {
-        setError('')
-      }, 4000)
-    }
-    if (miniDescription.trim() === '') {
-      setError('please check if you have filled in all the fields')
-      setTimeout(() => {
-        setError('')
-      }, 4000)
-    }
     if (
       miniDescription.trim() !== '' &&
       description.trim() !== '' &&
@@ -45,6 +21,12 @@ const AdminPage = () => {
       setImgUrl('')
       setDescription('')
       setMiniDescription('')
+    }
+    else{
+          setError('please check if you have filled in all the fields')
+          setTimeout(() => {
+            setError('')
+          }, 4000)
     }
   }
 

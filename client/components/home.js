@@ -10,6 +10,7 @@ import NavBar from './navbar'
 const Home = () => {
   const dispatch = useDispatch()
   const { posts } = useSelector(s => s.post)
+  const homePost = posts.slice(0, 1)
 
   useEffect(() => {
     dispatch(getPosts())
@@ -20,17 +21,18 @@ const Home = () => {
       <Head />
       <NavBar />
       <div className="container">
-        {posts.map(({ title, cotegory, description }) => {
-          return <Post key={title} title={title} cotegory={cotegory} description={description} />
+        {homePost.map(({ title, cotegory, description, img }) => {
+          return <Post key={title} title={title} cotegory={cotegory} description={description} img={img} />
         })}
         <div className="cards-blog">
-          {posts.map(({ cotegory, title, miniDescription }) => {
+          {posts.map(({ cotegory, title, miniDescription, img }) => {
             return (
               <CardPost
                 key={title}
                 cotegory={cotegory}
                 title={title}
                 miniDescription={miniDescription}
+                img={img}
               />
             )
           })}

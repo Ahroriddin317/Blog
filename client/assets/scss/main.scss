@@ -26,12 +26,14 @@ h1, h2 {
 .cards-blog{
   width: 904px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-   margin: 0 auto;
+  align-items: center;
+  margin: 0 auto;
 }
 
 @import 'post';
 @import 'signUp';
 @import 'nav-bar';
-@import 'cardBlog';
+@import 'cardPost';
 @import 'admin-page';

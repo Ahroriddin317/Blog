@@ -19,6 +19,10 @@ const postSchema = new mongoose.Schema(
     },
     miniDescription: {
       type: String
+    },
+    comments: {
+      type: [Object],
+      default: [Object]
     }
   },
   {

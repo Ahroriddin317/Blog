@@ -13,6 +13,7 @@ import NotFound from '../components/404'
 import Startup from './startup'
 import LoginForm from '../components/auth/login'
 import AdminPage from '../components/adminPage/adminPage'
+import Blog from '../components/blog'
 
 const OnlyAnonymousRoute = ({ component: Component, ...rest }) => {
 
@@ -79,6 +80,7 @@ const RootComponent = (props) => {
           <Switch>
             <OnlyAnonymousRoute exact path="/login" component={() => <LoginForm />} />
             <Route exact path="/" component={() => <Home />} />
+            <Route exact path="/blog/:title" component={() => <Blog />} />
             <PrivateRoute exact path="/private" component={() => <AdminPage />} />
             <Route component={() => <NotFound />} />
           </Switch>
