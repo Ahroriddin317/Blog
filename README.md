@@ -1,10 +1,10 @@
-# SkillCrucial React Redux boilerplate
+# Blog
 
 ## Quick start
 
 1. Clone this repo using:
   ```shell
-  $ git clone git@github.com:ovasylenko/skillcrucial-react-redux-boilerplate.git
+  $ git clone git@github.com:Ahroriddin317/Blog.git
   ```
 
 2. To install dependencies and clean the git repo run:
@@ -13,7 +13,7 @@
   $ yarn install
   ```
 
-  *We recommend using `yarn` for installing packages, but you can use `npm` instead*:
+  *I recommend using `yarn` for installing packages, but you can use `npm` instead*:
 
   ```shell
   $ npm install
@@ -38,17 +38,20 @@
 * Babel for old browser support
 * SASS/SCSS: make styles greate again, with no tears
 * React Router
-* Hot Module Replacement for comfortable development
 
 ## Project Structure
 
 #### `client/`
 
-You will write your app in this folder. You will spend most of your time in here.
+Everything related to the client side is located here
 
 #### `client/components`
 
-This folder contains all your components
+All components are in this folder
+
+#### `client/components/auth`
+
+Here the authorization and registration component
 
 #### `dist/assets`
 This directory contains compiled project files
