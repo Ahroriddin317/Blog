@@ -11,6 +11,7 @@ import auth from './middleware/auth'
 import jwt from 'jsonwebtoken'
 
 import mongooseService from './services/mongoose'
+import mySqlService from './services/mySqlServer'
 import passportJWT from './services/passport.js'
 
 import config from './config'
@@ -20,7 +21,6 @@ import Post from './model/Post.model'
 
 const Root = () => ''
 
-mongooseService.connect()
 try {
   // eslint-disable-next-line import/no-unresolved
   // ;(async () => {
@@ -69,19 +69,28 @@ server.get('/api/v1/auth', async (req, res) => {
 })
 
 server.get('/api/v1/posts', async (req, res) => {
-  const posts = await Post.find({})
-  res.json(posts)
+  const query = "SELECT * FROM posts"
+  mySqlService.query(query, (err, posts) => {
+    if (err) throw err
+    res.json(posts)
+  })
 })
 
 server.get('/api/v1/post/:title', async (req, res) => {
-  const post = await Post.find({title: req.params.title})
-  res.json(post)
+ const query = `SELECT * FROM posts WHERE title = "${req.params.title}"`
+ mySqlService.query(query, (err, post) => {
+   if (err) throw err
+   res.json(post)
+ })
 })
 
 server.post('/api/v1/added-post', async (req, res) => {
-  const post = new Post(req.body)
-  await post.save()
-  res.json({ status: 'added new post' })
+  const { img, title, description, miniDescription } = req.body
+  const query = `INSERT INTO posts VALUES (${null}, "${img}" ,"photography", "${title}", "${description}", "${miniDescription}")`
+  mySqlService.query(query, (err) => {
+    if (err) throw err
+    res.json({ status: 'added new post' })
+  })
 })
 
 server.post('/api/v1/auth', async (req, res) => {
