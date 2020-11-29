@@ -56,7 +56,11 @@ middleware.forEach((it) => server.use(it))
 server.get('/api/v1/auth', async (req, res) => {
   try {
     const jwtUser = jwt.verify(req.cookies.token, config.secret)
-    const user = await User.findById(jwtUser.uid)
+    const query = `SELECT * FROM users WHERE id = ${jwtUser.uid}`
+    const user = await   mySqlService.query(query, (err, user) => {
+      if(err) console.log(err)
+      return user
+    })
     const payload = { uid: user.id }
     const token = jwt.sign(payload, config.secret, { expiresIn: '48h' })
     delete user.password
@@ -94,9 +98,15 @@ server.post('/api/v1/added-post', async (req, res) => {
 })
 
 server.post('/api/v1/auth', async (req, res) => {
+  const { email, password } = req.body
   console.log(req.body)
   try {
-    const user = await User.findAndValidateUser(req.body)
+    let user = ''
+    const query = `SELECT *FROM users WHERE email= "${email}" AND password= "${password}"`
+    mySqlService.query(query, (err, result) => {
+      if (err) console.log(err)
+      user = result
+    })
     const payload = { uid: user.id }
     const token = jwt.sign(payload, config.secret, { expiresIn: '48h' })
     delete user.password
@@ -109,14 +119,19 @@ server.post('/api/v1/auth', async (req, res) => {
 })
 
 server.post('/api/v1/registration', async (req, res) => {
+  let user, usr = ""
   const { email, password, name } = req.body
-  const user = new User({
-    email,
-    password,
-    name
+  const query = `INSERT INTO users VALUES (${null}, "admin", "test2", "${email}", "${password}", "${name}")`
+  const queryUser = `SELECT *FROM users WHERE email= "${email}" AND password= "${password}"`
+  mySqlService.query(query, (err, result) => {
+    if (err)
+      console.log(err)
+    user = result
   })
-  await user.save()
-   const usr = await User.findAndValidateUser({ email, password })
+   mySqlService.query(queryUser, (err, result) => {
+     if (err) console.log(err)
+     usr = result
+   })
    console.log(usr)
    const payload = { uid: usr.id }
    const token = jwt.sign(payload, config.secret, { expiresIn: '48h' })

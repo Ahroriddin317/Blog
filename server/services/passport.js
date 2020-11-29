@@ -1,5 +1,5 @@
 import passportJWT from 'passport-jwt'
-import User from '../model/User.model'
+import mySqlService from './mySqlServer'
 import config from '../config'
 
 const cookieExtractor = (req) => {
@@ -12,7 +12,9 @@ const jwtOptions = {
 }
 
 const jwtStrategy = new passportJWT.Strategy(jwtOptions, (jwtPayload, done) => {
-  User.findById(jwtPayload.uid, (err, user) => {
+
+  const query = `SELECT * FROM users WHERE id = ${jwtPayload.uid}`
+  mySqlService.query(query, (err, user) => {
     if (err) {
       return done(err, null)
     }
